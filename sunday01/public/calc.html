@@ -1,0 +1,56 @@
+<!-- ! + tab : html 자동완성 -->
+<!--
+CORS 정책을 우회하는 방법
+방법1 : node에서 설정
+방법2 : proxy로 속임
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>웹 계산기</title>
+</head>
+<body>
+    <div>
+        <input type="text" id="a">
+        <input type="text" id="b">
+        <select name="" id="op">
+            <option value="plus">더하기</option>
+            <option value="minus">빼기</option>
+            <option value="multiply">곱하기</option>
+            <option value="divide">나누기</option>            
+        </select>
+        <input type="button" id="okBtn" value="계산하기">
+        <div id="result">결과 : </div>
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script>
+            $(document).ready(function() {
+                
+                $('#okBtn').click(function() {
+                    var url = 'http://localhost:3000/';
+                    var a = $('#a').val();
+                    var b = $('#b').val();
+                    var op = $('#op').val();
+                    
+                    url += op+'/'+a+'/'+b;
+                    
+                    //비동기 참고 : https://www.w3schools.com/js/js_ajax_intro.asp
+                    var xhr = new XMLHttpRequest();
+                    //console.dir(xhr);
+                    xhr.onreadystatechange = function() {
+                        //4, 200 이 떠야 정상임
+                        console.log(this.readyState, this.status);
+                        if(this.readyState === 4 && this.status === 200) {
+                            $('#result').html(this.responseText);
+                        }
+                    };
+                    
+                    xhr.open('GET', url, true); //어디로 요청을 보낼지 설정
+                    xhr.send(); //설정한 요청 보내기
+                    
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

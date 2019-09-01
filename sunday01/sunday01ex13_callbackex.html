@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sunday Node Lecture Afternoon Callback.js</title>
+    <style>
+        div#box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            background: yellow;
+            position: absolute;
+        }
+    </style>
+    <script>
+        var move = function(dest, callback) {
+        var box = document.querySelector('#box');
+            
+        //아래 콜백에서 this를 box로 사용하기 위해서
+        box.callback = callback;
+            
+        var x = 0;
+        var fn = setInterval(function() {
+                x += 10;
+                if(x >= dest){
+                    clearInterval(fn);
+                    box.callback();
+                }
+                box.style.left = x + 'px';
+            }, 30);
+        }
+        
+        window.onload = function() {
+            move(500, function() {
+                this.style.background = 'blue';
+                console.log(this);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Hello Gildong node World~!</h1>
+    <div id="box">
+        BOX
+    </div>
+    
+</body>
+</html>
