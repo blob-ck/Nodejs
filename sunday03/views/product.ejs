@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>/views/product.ejs</title>
+</head>
+<body style="text-align:center;">
+    <div style="display:inline-block;">
+        <h1>상품정보 페이지</h1>
+        <table border="1">
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>가격</th>
+                <th>제조사</th>
+                <th>제조년</th>
+            </tr>
+            <% for(let j = 0; j< cars.length; j++){%>
+            <tr>
+                <td><%=j%></td>
+                <td><a href="/process/product/<%=cars[j]._id%>"><%=cars[j].name%></a></td>
+                <td><%=cars[j].price%></td>
+                <td><%=cars[j].company%></td>
+                <td><%=cars[j].year%></td>
+            </tr>
+            <%}%>
+        </table>
+        <span><a href="/process/logout">로그아웃</a></span>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>/views/detail.ejs</title>
+</head>
+<body style="text-align:center;">
+    <div style="display:inline-block;">
+        <h1>상품 상세정보 페이지</h1>
+        <form action="/process/product/modify/<%=car._id%>" method="post">
+            <ul>
+                <li><span>품명 : </span><span><input type="text" name="name" value="<%=car.name%>"></span></li>
+                <li><span>가격 : </span><span><input type="text" name="price" value="<%=car.price%>"></span></li>
+                <li><span>제조사 : </span><span><input type="text" name="company" value="<%=car.company%>"></span></li>
+                <li><span>제조년 : </span><span><input type="text" name="year" value="<%=car.year%>"></span></li>
+            </ul>
+            <input type="submit" value="수정">
+        </form>
+        <span><a href="/process/product/delete/<%=car._id%>">삭제</a></span>
+        <span><a href="/process/product/modify/<%=car._id%>">수정</a></span>
+        <span><a href="/process/product">상품목록</a></span>
+        <span><a href="/process/logout">로그아웃</a></span>
+    </div>
+</body>
+</html>
