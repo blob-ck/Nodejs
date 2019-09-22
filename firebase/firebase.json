@@ -1,0 +1,33 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": [
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
+    ]
+  },
+  "hosting": {
+    "public": "public",
+
+      /** 배포하기 전 수정
+      redo나 rewrite를 해야 한다.
+      "source" 키 값을 "**"로 쓰면 모든 경로 사용 가능 */
+    "rewrites": [
+        {
+        "source": "**",
+        "function": "app"
+        }
+    ],
+      
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
